@@ -1,0 +1,21 @@
+[user]
+    email = matt.waggoner@devfacto.com
+    name = Matt Waggoner
+[core]
+    editor = vim
+[alias]
+    s = status
+    stauts = status # cause typos ¯\_(ツ)_/¯
+    c = commit
+    co = checkout
+    cm = commit -m
+    dw = diff -w
+    pom = push origin master
+    lg = log --graph --topo-order -C -M --pretty=format:\"<%Cred%h%Creset>\t%ad [%C(yellow)%an%Creset] %Cgreen%d%Creset %s\" --all --date=short
+    new = log origin/master.. --reverse -C -M --pretty=format:\"<%Cred%h%Creset> %ad [%C(yellow)%an%Creset] %Cgreen%d%Creset %s\" --all --date=short
+    pick = cherry-pick
+    cleanup = "!git branch --merged | grep -v '\\*\\|master\\|dev' | xargs -n 1 git branch -d"
+[color]
+    ui = auto
+[credential]
+    helper = osxkeychain
