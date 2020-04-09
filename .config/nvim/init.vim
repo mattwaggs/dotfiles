@@ -9,6 +9,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'neoclide/jsonc.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -99,6 +101,30 @@ hi tsxAttrib guifg=#fabd2f cterm=italic
 " ---- rust format on save ----
 let g:rustfmt_autosave = 1
 let g:rust_recommended_style = 0
+
+
+" ---- FZF ----
+
+" this should give us fzf previews
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+" set the layout of the fzf window
+let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.5, 'yoffset': 1 } }
+
+" Hide status line temporarily
+if has('nvim') && !exists('g:fzf_layout')
+  autocmd! FileType fzf
+  autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+endif
+
+command! -bang -nargs=? -complete=dir GitFiles
+    \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+nnoremap <silent> <C-o> :Files<CR>
+nnoremap <silent> <C-p> :GitFiles<CR>
+
 
 " ---- auto reload after saving ----
 augroup myvimrchooks
