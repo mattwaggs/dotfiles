@@ -141,3 +141,7 @@ augroup myvimrchooks
 augroup END
 
 
+" ---- ctrl-u to uppercase a word ---- 
+imap <c-u> <esc>viwUea
+nmap <c-u> viwUe
+
