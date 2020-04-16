@@ -122,8 +122,8 @@ endif
 command! -bang -nargs=? -complete=dir GitFiles
     \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
-nnoremap <silent> <C-o> :Files<CR>
-nnoremap <silent> <C-p> :GitFiles<CR>
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-g> :GitFiles<CR>
 
 
 " ---- auto reload after saving ----
