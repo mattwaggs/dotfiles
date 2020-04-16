@@ -126,6 +126,14 @@ nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-g> :GitFiles<CR>
 
 
+" ---- Color Column ----
+
+set colorcolumn=80
+" light
+highlight ColorColumn guibg=#32302F 
+" dark
+" highlight ColorColumn guibg=#1d2021
+
 " ---- auto reload after saving ----
 augroup myvimrchooks
     au!
