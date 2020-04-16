@@ -1,4 +1,13 @@
 {
   "json.schemas": ["json", "jsonc"],
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "typescriptreact", "javascriptreact"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "typescriptreact",
+    "javascriptreact",
+    "typescript",
+    "javascript",
+    "graphql",
+    "json"
+  ],
 }
