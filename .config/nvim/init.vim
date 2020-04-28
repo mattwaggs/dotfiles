@@ -3,14 +3,23 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }         
-Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim'
 Plug 'neoclide/jsonc.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+"Plug 'peitalin/vim-jsx-typescript'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+" Color schemes
+Plug 'joshdick/onedark.vim'
+Plug 'dracula/vim', { 'as':'dracula' }
+Plug 'morhetz/gruvbox'
+"Plug 'drewtempelmeyer/palenight.vim'
+"Plug 'ayu-theme/ayu-vim'
+"Plug 'ajh17/spacegray.vim'
+"Plug 'junegunn/seoul256.vim'
+"Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
@@ -19,22 +28,36 @@ set nowrap
 
 " ---- color schemes ----
 set termguicolors
-colorscheme gruvbox
-let g:gruvbox_contrast_dark='medium'
-set background=dark
+"colorscheme gruvbox
+"let g:gruvbox_contrast_dark='medium'
+"let ayucolor="mirage"
+"colorscheme dracula
+colorscheme onedark
+"set background=dark
+
+"set background=light
+"colorscheme PaperColor
+
+" ---- Color Column ----
+set colorcolumn=80
+" these colors only work with gruvbox
+" light
+" highlight ColorColumn guibg=#32302F 
+" dark
+" highlight ColorColumn guibg=#1d2021
 
 " ---- relative line numbers ----
 set number relativenumber
 set nu rnu
 
-" tweak highlighting of the line numbers
+" tweak highlighting of the line numbers (only works with gruvbox)
 " more fadded
-highlight LineNr guifg=#3c3836 
+" highlight LineNr guifg=#3c3836 
 " less faded
-"highlight LineNr guifg=#665c54 
+" highlight LineNr guifg=#665c54 
 
-highlight SignColumn guibg=bg
-highlight CursorLineNr guibg=bg guifg=#d79921
+" highlight SignColumn guibg=bg
+" highlight CursorLineNr guibg=bg guifg=#d79921
 
 " ---- tabs ----
 "  we should figure out how to override this with editor config
@@ -81,12 +104,18 @@ let g:coc_global_extensions = [
 " ---- prettier ----
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-" ---- treat tsconfig.json as jsonc to allow comments ----
-autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
-
+" ---- rust format on save ----
+let g:rustfmt_autosave = 1
+let g:rust_recommended_style = 0
 
 " ---- jsx / tsx highlighting ----
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+augroup typescript
+  au!
+
+  " ---- treat tsconfig.json as jsonc to allow comments ----
+  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+  autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
+augroup END
 
 hi tsxTag guifg=#83a598
 hi tsxTagName guifg=#689d6a
@@ -96,11 +125,6 @@ hi tsxCloseTagName guifg=#689d6a
 hi tsxAttributeBraces guifg=#d5c4a1
 hi tsxEqual guifg=#bdae93
 hi tsxAttrib guifg=#fabd2f cterm=italic
-
-
-" ---- rust format on save ----
-let g:rustfmt_autosave = 1
-let g:rust_recommended_style = 0
 
 
 " ---- FZF ----
@@ -125,15 +149,6 @@ command! -bang -nargs=? -complete=dir GitFiles
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-g> :GitFiles<CR>
 
-
-" ---- Color Column ----
-
-set colorcolumn=80
-" light
-highlight ColorColumn guibg=#32302F 
-" dark
-" highlight ColorColumn guibg=#1d2021
-
 " ---- auto reload after saving ----
 augroup myvimrchooks
     au!
@@ -141,7 +156,44 @@ augroup myvimrchooks
 augroup END
 
 
+" ---- Navigation ----
+nnoremap <c-h> I<esc>
+nnoremap <c-l> $
+nnoremap <c-j> <c-d>
+nnoremap <c-k> <c-u>
+
 " ---- ctrl-u to uppercase a word ---- 
-imap <c-u> <esc>viwUea
-nmap <c-u> viwUe
+inoremap <c-u> <esc>viwUea
+nnoremap <c-u> viwUe
+
+
+" ---- surround with quotes ---- 
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
+
+
+" ---- quick jump to vimrc ----
+nnoremap <leader>ev :tabe $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+
+" ---- use line wrapping in markdown files ----
+" autocmd BufNewFile,BufRead *.md set filetype=markdown
+augroup markdown
+  au!
+  au BufRead,BufNewFile *.md setlocal textwidth=80
+  au bufwritepost *.md norm gggqG
+augroup END
+
+
+
+
+" ---- I just learned about folding  ----
+set foldmethod=syntax
+augroup folding
+  au!
+  " open all folds on open
+  au BufRead,BufWinEnter * normal zR
+augroup END
+
 
