@@ -158,6 +158,7 @@ alias g='git'
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
+alias emulator='/Users/Matt/Library/Android/sdk/emulator/emulator'
 
 # configure fzf to use fd, if installed
 if [ -x "$(command -v fzf)" ] && [ -x "$(command -v fd)" ]; then
@@ -166,7 +167,7 @@ if [ -x "$(command -v fzf)" ] && [ -x "$(command -v fd)" ]; then
 fi
 
 # If running in WSL
-if grep -q Microsoft /proc/version; then
+if grep -q Microsoft /proc/version > /dev/null 2>&1; then
 
 	alias o='/mnt/c/Windows/explorer.exe'
 	
@@ -196,3 +197,103 @@ if grep -q Microsoft /proc/version; then
 	
 fi
 
+# Add flutter tools to the path
+export PATH="$PATH:/Users/Matt/development/tools/flutter/bin"
+export PATH="$PATH:/Users/Matt/Library/Python/2.7/bin"
+export PATH="$PATH:/Users/Matt/development/tools/flutter/bin/dart"
+export PATH="$PATH:/usr/local/Cellar/node/14.12.0/bin"
+
+export BAT_THEME="gruvbox"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/Matt/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/Matt/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/Matt/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/Matt/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+#
+# Installation:
+#
+# Via shell config file  ~/.bashrc  (or ~/.zshrc)
+#
+#   Append the contents to config file
+#   'source' the file in the config file
+#
+# You may also have a directory on your system that is configured
+#    for completion files, such as:
+#
+#    /usr/local/etc/bash_completion.d/
+
+###-begin-flutter-completion-###
+
+if type complete &>/dev/null; then
+  __flutter_completion() {
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           flutter completion -- "${COMP_WORDS[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -F __flutter_completion flutter
+elif type compdef &>/dev/null; then
+  __flutter_completion() {
+    si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 flutter completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef __flutter_completion flutter
+elif type compctl &>/dev/null; then
+  __flutter_completion() {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       flutter completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K __flutter_completion flutter
+fi
+
+###-end-flutter-completion-###
+
+## Generated 2020-10-13 20:39:01.182573Z
+## By /Users/Matt/development/tools/flutter/bin/cache/flutter_tools.snapshot
+
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+
+_python_argcomplete() {
+  local IFS=$'\013'
+  local SUPPRESS_SPACE=0
+  if compopt +o nospace 2> /dev/null; then
+      SUPPRESS_SPACE=1
+  fi
+  COMPREPLY=( $(IFS="$IFS" \
+      COMP_LINE="$COMP_LINE" \
+      COMP_POINT="$COMP_POINT" \
+      COMP_TYPE="$COMP_TYPE" \
+      _ARGCOMPLETE_COMP_WORDBREAKS="$COMP_WORDBREAKS" \
+      _ARGCOMPLETE=1 \
+      _ARGCOMPLETE_SUPPRESS_SPACE=$SUPPRESS_SPACE \
+      "$1" 8>&1 9>&2 1>/dev/null 2>/dev/null) )
+            if [[ $? != 0 ]]; then
+                unset COMPREPLY
+            elif [[ $SUPPRESS_SPACE == 1 ]] && [[ "$COMPREPLY" =~ [=/:]$ ]]; then
+                compopt -o nospace
+            fi
+        }
+    complete -o nospace -o default -o bashdefault -F _python_argcomplete "az"

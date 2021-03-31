@@ -3,6 +3,7 @@
     name = Matt Waggoner
 [core]
     editor = vim
+    pager = delta
 [alias]
     s = status
     stauts = status # cause typos ¯\_(ツ)_/¯
@@ -21,3 +22,28 @@
     helper = osxkeychain
 [diff]
     algorithm = patience
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+[delta]
+    plus-style = syntax "#003800"
+    minus-style = syntax "#3f0001"
+    features = side-by-side line-numbers decorations
+    syntax-theme = gruvbox
+    line-numbers = true
+    side-by-side = true
+    hunk-header-hide = true
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow
+    file-style = bold yellow
+    file-decoration-style = none
+    hunk-header-style = omit
+
+[delta "line-numbers"]
+    line-numbers-left-style = cyan
+    line-numbers-right-style = cyan
+    line-numbers-minus-style = 124
+    line-numbers-plus-style = 28
