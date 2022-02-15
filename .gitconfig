@@ -4,6 +4,7 @@
 [core]
     editor = vim
     pager = delta
+    autocrlf = input
 [alias]
     s = status
     stauts = status # cause typos ¯\_(ツ)_/¯
@@ -11,11 +12,12 @@
     co = checkout
     cm = commit -m
     dw = diff -w
-    pom = push origin master
-    lg = log --graph --abbrev-commit -C -M --pretty=format:\"%Cred%h%Creset %ar by %C(yellow)%an%Creset %C(auto)%d %s\" --all
-    new = log origin/master.. --reverse -C -M --pretty=format:\"<%Cred%h%Creset> %ad [%C(yellow)%an%Creset] %Cgreen%d%Creset %s\" --all --date=short
+    pom = push origin main
+    lg = log --graph --topo-order --abbrev-commit -C -M --pretty=format:\"%Cred%h%Creset %ar by %C(yellow)%an%Creset %C(auto)%d %s\" --all
+    new = log origin/main.. --reverse -C -M --pretty=format:\"<%Cred%h%Creset> %ad [%C(yellow)%an%Creset] %Cgreen%d%Creset %s\" --all --date=short
     pick = cherry-pick
-    cleanup = "!git branch --merged | grep -v '\\*\\|master\\|dev' | xargs -n 1 git branch -d"
+    cleanup = "!git branch --merged | grep -v '\\*\\|master\\|dev\\|main' | xargs -n 1 git branch -d"
+	root = rev-parse --show-toplevel
 [color]
     ui = auto
 [credential]

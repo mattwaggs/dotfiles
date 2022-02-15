@@ -1,3 +1,8 @@
+
+#### FIG ENV VARIABLES ####
+# Please make sure this block is at the start of this file.
+[ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
+#### END FIG ENV VARIABLES ####
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -8,7 +13,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="spaceship"
+# ZSH_THEME="spaceship"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -99,7 +105,7 @@ SPACESHIP_PROMPT_ORDER=(
   #rust          # Rust section
   #haskell       # Haskell Stack section
   #julia         # Julia section
-  docker        # Docker section
+  #docker        # Docker section
   #aws           # Amazon Web Services section
   #venv          # virtualenv section
   #conda         # conda virtualenv section
@@ -159,6 +165,10 @@ alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias emulator='/Users/Matt/Library/Android/sdk/emulator/emulator'
+alias catchup='g fetch --all && git rebase "origin/$(git branch --show-current)"'
+
+alias switch='git branch | grep -v "^\*" | fzf --height=20% --reverse --info=inline | xargs git checkout'
+alias switchlg='git lg | fzf --reverse | sed -E "s/.*([a-f0-9]{8}).*/\1/g" | xargs git checkout'
 
 # configure fzf to use fd, if installed
 if [ -x "$(command -v fzf)" ] && [ -x "$(command -v fd)" ]; then
@@ -202,6 +212,8 @@ export PATH="$PATH:/Users/Matt/development/tools/flutter/bin"
 export PATH="$PATH:/Users/Matt/Library/Python/2.7/bin"
 export PATH="$PATH:/Users/Matt/development/tools/flutter/bin/dart"
 export PATH="$PATH:/usr/local/Cellar/node/14.12.0/bin"
+export PATH="$PATH:/usr/local/Cellar/node/15.11.0/bin"
+export PATH="$PATH:/usr/local/Cellar/node/16.12.0/bin"
 
 export BAT_THEME="gruvbox"
 
@@ -297,3 +309,13 @@ _python_argcomplete() {
             fi
         }
     complete -o nospace -o default -o bashdefault -F _python_argcomplete "az"
+
+
+
+# For the dotnet development
+export ASPNETCORE_ENVIRONMENT='development'
+
+#### FIG ENV VARIABLES ####
+# Please make sure this block is at the end of this file.
+[ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
+#### END FIG ENV VARIABLES ####

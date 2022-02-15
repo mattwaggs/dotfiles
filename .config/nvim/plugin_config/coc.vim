@@ -141,7 +141,7 @@ let g:coc_global_extensions = [
 	\'coc-sh',
 	\'coc-docker',
 	\'coc-yaml',
-	\'coc-flutter-tools',
+	\'coc-flutter',
 	\]
 " }}}
 

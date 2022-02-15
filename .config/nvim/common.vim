@@ -9,15 +9,16 @@ nnoremap <c-k> <c-u>
 
 " ctrl-u to uppercase a word 
 inoremap <c-u> <esc>viwUea
-nnoremap <c-u> viwUe
+" nnoremap <c-u> viwUe
 
 " surround with quotes 
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
 
 " quick jump to vimrc 
-nnoremap <leader>ev :tabe ~/.config/nvim/<cr>
+" nnoremap <leader>ev :tabe ~/.config/nvim/<cr> " now using telescope for this
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 
 " clean up whitespace
 nnoremap <leader>ww :%s/\s\+$//e<cr> 
+

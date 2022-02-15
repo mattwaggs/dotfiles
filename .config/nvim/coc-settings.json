@@ -1,29 +1,40 @@
 {
   "json.schemas": ["json", "jsonc"],
   "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "markdown",
-    "typescriptreact",
-    "javascriptreact",
-    "typescript",
-    "javascript",
-    "graphql",
-    "json",
+    //"css",
+    //"markdown",
+    //"typescriptreact",
+    //"javascriptreact",
+    //"typescript",
+    //"javascript",
+    //"graphql",
+    //"json",
     "dart"
   ],
   "suggest.autoTrigger": "always",
   "suggest.minTriggerInputLength": 2,
   "suggest.triggerAfterInsertEnter": true,
-  "coc.source.OmniSharp.enable": true,
-  "coc.source.OmniSharp.triggerCharacters": ".",
+  //"coc.source.OmniSharp.enable": true,
+  //"coc.source.OmniSharp.triggerCharacters": ".",
   "tailwindCSS.jsLanguages": [
     "javascript",
     "javascriptreact",
     "reason",
     "typescriptreact"
   ],
-  "snippets.ultisnips.directories": [
-    "UltiSnips",
-    "~/.config/nvim/snips"
-  ]
+  //"snippets.ultisnips.directories": [
+  //  "UltiSnips",
+  //  "~/.config/nvim/snips"
+  //],
+  //"languageserver": {
+  //  "bicep": {
+  //    "command": "dotnet",
+  //    "args": ["/usr/local/bin/bicep-langserver/Bicep.LangServer.dll"],
+  //    "filetypes": ["bicep"],
+  //    "initializationOptions": {
+  //    },
+  //    "settings": {
+  //    }
+  //  }
+  //}
 }
