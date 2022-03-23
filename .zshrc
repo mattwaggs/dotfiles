@@ -211,9 +211,12 @@ fi
 export PATH="$PATH:/Users/Matt/development/tools/flutter/bin"
 export PATH="$PATH:/Users/Matt/Library/Python/2.7/bin"
 export PATH="$PATH:/Users/Matt/development/tools/flutter/bin/dart"
-export PATH="$PATH:/usr/local/Cellar/node/14.12.0/bin"
+
+# Add npm to the path
+export PATH="$PATH:/usr/local/Cellar/node/15.12.0/bin"
 export PATH="$PATH:/usr/local/Cellar/node/15.11.0/bin"
 export PATH="$PATH:/usr/local/Cellar/node/16.12.0/bin"
+export PATH="$PATH:/usr/local/Cellar/node/17.5.0/bin"
 
 export BAT_THEME="gruvbox"
 

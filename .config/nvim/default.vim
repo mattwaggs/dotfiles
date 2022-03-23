@@ -4,8 +4,6 @@ call plug#begin('~/.vim/plugged')
 " hack to improve perf
 let g:loaded_matchparen = 1
 
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }         
 Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim'
@@ -17,8 +15,9 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer', {'branch': 'main'}
 Plug 'hrsh7th/nvim-compe'
-Plug 'mhartington/formatter.nvim'
-"Plug 'ray-x/lsp_signature.nvim'
+
+" null-ls is used to provide formatting
+Plug 'jose-elias-alvarez/null-ls.nvim', {'branch': 'main'}
 
 " telescope
 Plug 'nvim-lua/popup.nvim'
@@ -42,11 +41,11 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'yamatsum/nvim-nonicons', {'branch': 'main'}
 Plug 'lewis6991/gitsigns.nvim', {'branch': 'main'}
 
-"Plug 'tpope/vim-dadbod'
-"Plug 'kristijanhusak/vim-dadbod-ui'
-
 " add flutter lsp stuff 
 Plug 'akinsho/flutter-tools.nvim', { 'branch': 'main' }
+
+" makes it easier to use jk to escape
+Plug 'max397574/better-escape.nvim'
 
 call plug#end()
 " }}}
@@ -96,7 +95,7 @@ highlight CursorLineNr guibg=bg guifg=#d79921
 
 " NERDTree Settings ----------------------- {{{
 noremap <C-\> :NERDTreeToggle<CR>
-let NERDTreeIgnore=['node_modules', 'obj', 'bin']
+let NERDTreeIgnore=['node_modules', 'obj', 'bin', '.DS_Store']
 " }}}
 
 " Status Line ----------------------------- {{{
@@ -234,8 +233,7 @@ highlight! link using_directive GruvboxPurple
 lua require('config.lsp')
 lua require('config.telescope')
 lua require('config.statusline')
-"lua require('lsp_signature').setup()
-
+lua require('config.null-ls')
 
 " lsp flutter tools - not as good as flutter-coc
 "lua << EOF
@@ -243,3 +241,6 @@ lua require('config.statusline')
 "EOF
 
 nnoremap <leader>ev :lua require('config.telescope').search_dotfiles()<CR>
+
+lua require("better_escape").setup()
+
