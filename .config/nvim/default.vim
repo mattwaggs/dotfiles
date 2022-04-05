@@ -242,5 +242,9 @@ lua require('config.null-ls')
 
 nnoremap <leader>ev :lua require('config.telescope').search_dotfiles()<CR>
 
-lua require("better_escape").setup()
+lua <<EOF
+require("better_escape").setup {
+  mapping = {"jk", "jj", "kj"},
+EOF }
+
 
