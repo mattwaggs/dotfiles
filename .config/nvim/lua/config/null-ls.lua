@@ -1,9 +1,11 @@
 require('null-ls').setup({
   sources = {
+    -- null ls will only be used with buffers compatible with these soucres
     require('null-ls').builtins.formatting.stylua,
     require('null-ls').builtins.formatting.prettier.with({
       prefer_local = 'node_modules/.bin',
     }),
+    require('null-ls').builtins.formatting.terraform_fmt,
   },
 
   -- you can reuse a shared lspconfig on_attach callback here

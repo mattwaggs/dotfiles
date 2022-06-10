@@ -4,7 +4,7 @@
 [core]
     editor = vim
     pager = delta
-	autocrlf = true
+    autocrlf = input
 [alias]
     s = status
     stauts = status # cause typos ¯\_(ツ)_/¯
@@ -17,7 +17,7 @@
     new = log origin/main.. --reverse -C -M --pretty=format:\"<%Cred%h%Creset> %ad [%C(yellow)%an%Creset] %Cgreen%d%Creset %s\" --all --date=short
     pick = cherry-pick
     cleanup = "!git branch --merged | grep -v '\\*\\|master\\|dev\\|main' | xargs -n 1 git branch -d"
-	root = rev-parse --show-toplevel
+    root = rev-parse --show-toplevel
 [color]
     ui = auto
 [credential]
@@ -30,7 +30,7 @@
     plus-style = syntax "#003800"
     minus-style = syntax "#3f0001"
     features = side-by-side line-numbers decorations
-    syntax-theme = gruvbox
+    syntax-theme = gruvbox-dark
     line-numbers = true
     side-by-side = true
     hunk-header-hide = true

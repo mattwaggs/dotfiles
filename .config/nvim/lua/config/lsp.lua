@@ -19,6 +19,8 @@ vim.api.nvim_set_keymap('n', '<Leader>n', ':lua vim.diagnostic.goto_next()<CR>',
 -- one at a time in the floating window)
 vim.api.nvim_set_keymap('n', '<Leader>p', ':lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 
+vim.api.nvim_command('inoremap <C-space> <C-x><C-o>')
+
 -- keymaps
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...)
@@ -76,8 +78,6 @@ local on_attach = function(client, bufnr)
     )
   end
 
-  -- ~turn on lsp formatting for typescript~
-  -- this did not fix my issues with formatting.
   if client.name == 'tsserver' then
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
@@ -89,6 +89,11 @@ local on_attach = function(client, bufnr)
   end
 
   if client.name == 'jsonls' then
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+  end
+
+  if client.name == 'terraformls' then
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
   end

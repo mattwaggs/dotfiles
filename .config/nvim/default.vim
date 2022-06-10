@@ -165,10 +165,40 @@ set backupcopy=yes
 autocmd BufRead,BufNewFile *.bicep set filetype=bicep
 
 
+autocmd BufRead,BufNewFile *.prisma set filetype=prisma
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = {
+    "bash",
+    "c",
+    "c_sharp",
+    "cmake",
+    "comment",
+    "css",
+    "dart",
+    "dockerfile",
+    "go",
+    "graphql",
+    "html",
+    "jsdoc",
+    "json",
+    "jsonc",
+    "kotlin",
+    "lua",
+    "make",
+    "markdown",
+    "php",
+    "prisma",
+    "proto",
+    "python",
+    "rust",
+    "scss",
+    "swift",
+    "toml",
+    "vim",
+    "yaml"
+  },
   ignore_install = { "javascript", "typescript", "tsx" }, -- List of parsers to ignore installing
   highlight = {
     enable = true,              -- false will disable the whole extension
@@ -244,7 +274,7 @@ nnoremap <leader>ev :lua require('config.telescope').search_dotfiles()<CR>
 
 lua <<EOF
 require("better_escape").setup {
-  mapping = {"jk", "jj", "kj"},
-EOF }
-
+  mapping = {"jk", "jj", "kj"}
+}
+EOF
 

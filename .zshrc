@@ -1,7 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-export PATH="${PATH}:${HOME}/.local/bin"
-eval "$(fig init zsh pre)"
-
+. "$HOME/.fig/shell/zshrc.pre.zsh"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -216,8 +214,10 @@ export PATH="$PATH:/usr/local/Cellar/node/15.12.0/bin"
 export PATH="$PATH:/usr/local/Cellar/node/15.11.0/bin"
 export PATH="$PATH:/usr/local/Cellar/node/16.12.0/bin"
 export PATH="$PATH:/usr/local/Cellar/node/17.5.0/bin"
+export PATH="$PATH:/usr/local/Cellar/node/17.6.0/bin"
+export PATH="$PATH:/usr/local/Cellar/node/17.9.0/bin"
 
-export BAT_THEME="gruvbox"
+export BAT_THEME="gruvbox-dark"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/Matt/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/Matt/Downloads/google-cloud-sdk/path.zsh.inc'; fi
@@ -318,5 +318,4 @@ _python_argcomplete() {
 export ASPNETCORE_ENVIRONMENT='development'
 
 # Fig post block. Keep at the bottom of this file.
-eval "$(fig init zsh post)"
-
+. "$HOME/.fig/shell/zshrc.post.zsh"
