@@ -11,55 +11,55 @@ local whitespace = require('galaxyline.provider_whitespace')
 local lspclient = require('galaxyline.provider_lsp')
 
 -- todo move me
-require('gitsigns').setup()
+-- require('gitsigns').setup()
 
 -- fill it with absolute colors
 -- colors stolen from gruvbox
 local colors = {
-  ['dark0_hard']  = '#1d2021',
-  ['dark0']       = '#282828',
-  ['dark0_soft']  = '#32302f',
-  ['dark1']       = '#3c3836',
-  ['dark2']       = '#504945',
-  ['dark3']       = '#665c54',
-  ['dark4']       = '#7c6f64',
-  ['dark4_256']   = '#7c6f64',
+  ['dark0_hard'] = '#1d2021',
+  ['dark0'] = '#282828',
+  ['dark0_soft'] = '#32302f',
+  ['dark1'] = '#3c3836',
+  ['dark2'] = '#504945',
+  ['dark3'] = '#665c54',
+  ['dark4'] = '#7c6f64',
+  ['dark4_256'] = '#7c6f64',
 
-  ['gray_245']    = '#928374',
-  ['gray_244']    = '#928374',
+  ['gray_245'] = '#928374',
+  ['gray_244'] = '#928374',
 
   ['light0_hard'] = '#f9f5d7',
-  ['light0']      = '#fbf1c7',
+  ['light0'] = '#fbf1c7',
   ['light0_soft'] = '#f2e5bc',
-  ['light1']      = '#ebdbb2',
-  ['light2']      = '#d5c4a1',
-  ['light3']      = '#bdae93',
-  ['light4']      = '#a89984',
-  ['light4_256']  = '#a89984',
+  ['light1'] = '#ebdbb2',
+  ['light2'] = '#d5c4a1',
+  ['light3'] = '#bdae93',
+  ['light4'] = '#a89984',
+  ['light4_256'] = '#a89984',
 
-  ['bright_red']     = '#fb4934',
-  ['bright_green']   = '#b8bb26',
-  ['bright_yellow']  = '#fabd2f',
-  ['bright_blue']    = '#83a598',
-  ['bright_purple']  = '#d3869b',
-  ['bright_aqua']    = '#8ec07c',
-  ['bright_orange']  = '#fe8019',
+  ['bright_red'] = '#fb4934',
+  ['bright_green'] = '#b8bb26',
+  ['bright_yellow'] = '#fabd2f',
+  ['bright_blue'] = '#83a598',
+  ['bright_purple'] = '#d3869b',
+  ['bright_aqua'] = '#8ec07c',
+  ['bright_orange'] = '#fe8019',
 
-  ['neutral_red']    = '#cc241d',
-  ['neutral_green']  = '#98971a',
+  ['neutral_red'] = '#cc241d',
+  ['neutral_green'] = '#98971a',
   ['neutral_yellow'] = '#d79921',
-  ['neutral_blue']   = '#458588',
+  ['neutral_blue'] = '#458588',
   ['neutral_purple'] = '#b16286',
-  ['neutral_aqua']   = '#689d6a',
+  ['neutral_aqua'] = '#689d6a',
   ['neutral_orange'] = '#d65d0e',
 
-  ['faded_red']      = '#9d0006',
-  ['faded_green']    = '#79740e',
-  ['faded_yellow']   = '#b57614',
-  ['faded_blue']     = '#076678',
-  ['faded_purple']   = '#8f3f71',
-  ['faded_aqua']     = '#427b58',
-  ['faded_orange']   = '#af3a03',
+  ['faded_red'] = '#9d0006',
+  ['faded_green'] = '#79740e',
+  ['faded_yellow'] = '#b57614',
+  ['faded_blue'] = '#076678',
+  ['faded_purple'] = '#8f3f71',
+  ['faded_aqua'] = '#427b58',
+  ['faded_orange'] = '#af3a03',
 }
 
 -- provider
@@ -69,9 +69,9 @@ FileTypeName = buffer.get_buffer_filetype
 LineEndings = buffer.get_line
 -- Git Provider
 GitBranch = vcs.get_git_branch
-DiffAdd = vcs.DiffAdd             -- support vim-gitgutter vim-signify gitsigns
-DiffModified = vcs.diff_modified   -- support vim-gitgutter vim-signify gitsigns
-DiffRemove = vcs.diff_remove       -- support vim-gitgutter vim-signify gitsigns
+DiffAdd = vcs.DiffAdd -- support vim-gitgutter vim-signify gitsigns
+DiffModified = vcs.diff_modified -- support vim-gitgutter vim-signify gitsigns
+DiffRemove = vcs.diff_remove -- support vim-gitgutter vim-signify gitsigns
 -- File Provider
 LineColumn = fileinfo.line_column
 FileFormat = fileinfo.get_file_format
@@ -81,7 +81,6 @@ FileIcon = fileinfo.get_file_icon
 FileName = fileinfo.get_current_file_name
 LinePercent = fileinfo.current_line_percent
 ScrollBar = extension.scrollbar_instance
-
 
 -- Whitespace
 Whitespace = whitespace.get_item
@@ -95,34 +94,34 @@ DiagnosticInfo = diagnostic.get_diagnostic_info
 -- LSP
 GetLspClient = lspclient.get_lsp_client
 
-local separators = {bLeft = '  ', bRight = ' ', uLeft = ' ', uTop = ' '}
+local separators = { bLeft = '  ', bRight = ' ', uLeft = ' ', uTop = ' ' }
 
 gls.left[1] = {
   CustomViMode = {
     provider = function()
       local mode_names = {
-        ['n'] = {'NORMAL', colors.bright_aqua},
-        ['v'] = {'VISUAL', colors.bright_blue},
-        ['V'] = {'VISUAL', colors.bright_blue},
-        [''] = {'VISUAL BLOCK', colors.bright_blue},
-        ['s'] = {'SELECT', colors.bright_aqua},
-        ['S'] = {'SELECT', colors.bright_aqua},
-        [''] = {'SELECT BLOCK', colors.bright_aqua},
-        ['i'] = {'INSERT', colors.bright_purple},
-        ['ic'] = {'INSERT', colors.bright_purple},
-        ['ix'] = {'INSERT', colors.bright_purple},
-        ['R'] = {'REPLACE', colors.bright_orange},
-        ['Rc'] = {'REPLACE', colors.bright_orange},
-        ['Rv'] = {'REPLACE', colors.bright_orange},
-        ['Rx'] = {'REPLACE', colors.bright_orange},
-        ['c'] = {'COMMAND', colors.bright_red},
-        ['cv'] = {'VIM EX', colors.bright_red},
-        ['ce'] = {'NORMAL EX', colors.bright_red},
-        ['r'] = {'HIT-ENTER', colors.neutral_yellow},
-        ['rm'] = {'-- MORE', colors.neutral_yellow},
-        ['r?'] = {'CONFIRM', colors.neutral_yellow},
-        ['!'] = {'SHELL', colors.neutral_green},
-        ['t'] = {'TERMINAL', colors.neutral_green}
+        ['n'] = { 'NORMAL', colors.bright_aqua },
+        ['v'] = { 'VISUAL', colors.bright_blue },
+        ['V'] = { 'VISUAL', colors.bright_blue },
+        [''] = { 'VISUAL BLOCK', colors.bright_blue },
+        ['s'] = { 'SELECT', colors.bright_aqua },
+        ['S'] = { 'SELECT', colors.bright_aqua },
+        [''] = { 'SELECT BLOCK', colors.bright_aqua },
+        ['i'] = { 'INSERT', colors.bright_purple },
+        ['ic'] = { 'INSERT', colors.bright_purple },
+        ['ix'] = { 'INSERT', colors.bright_purple },
+        ['R'] = { 'REPLACE', colors.bright_orange },
+        ['Rc'] = { 'REPLACE', colors.bright_orange },
+        ['Rv'] = { 'REPLACE', colors.bright_orange },
+        ['Rx'] = { 'REPLACE', colors.bright_orange },
+        ['c'] = { 'COMMAND', colors.bright_red },
+        ['cv'] = { 'VIM EX', colors.bright_red },
+        ['ce'] = { 'NORMAL EX', colors.bright_red },
+        ['r'] = { 'HIT-ENTER', colors.neutral_yellow },
+        ['rm'] = { '-- MORE', colors.neutral_yellow },
+        ['r?'] = { 'CONFIRM', colors.neutral_yellow },
+        ['!'] = { 'SHELL', colors.neutral_green },
+        ['t'] = { 'TERMINAL', colors.neutral_green },
       }
 
       local vim_mode = mode_names[vim.fn.mode()]
@@ -135,26 +134,25 @@ gls.left[1] = {
     highlight = { colors.light4, colors.dark2 },
     separator = ' ',
     -- separator = separators.bLeft,
-    separator_highlight  = { colors.dark1, colors.dark1 },
+    separator_highlight = { colors.dark1, colors.dark1 },
   },
 }
-gls.left[2] ={
-    FileName = {
-        provider = { FileName },
-        highlight = {colors.light4, colors.dark1},
-        -- separator = separators.bLeft,
-        -- separator_highlight = {colors.dark2,colors.dark1},
-    },
+gls.left[2] = {
+  FileName = {
+    provider = { FileName },
+    highlight = { colors.light4, colors.dark1 },
+    -- separator = separators.bLeft,
+    -- separator_highlight = {colors.dark2,colors.dark1},
+  },
 }
-gls.left[3] ={
-    Space = {
-        provider = function()
-            return ' '
-        end,
-        highlight = { colors.light4, colors.dark1 },
-    },
+gls.left[3] = {
+  Space = {
+    provider = function()
+      return ' '
+    end,
+    highlight = { colors.light4, colors.dark1 },
+  },
 }
-
 
 gls.right = {
   {
@@ -164,8 +162,8 @@ gls.right = {
           return
         end
 
-        local error_count = #vim.diagnostic.get(0, {severity=vim.diagnostic.severity.Error})
-        if (error_count == 0) then
+        local error_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.Error })
+        if error_count == 0 then
           vim.cmd('highlight link GalaxyRightLspError GalaxyLeftLspInactive')
         else
           vim.cmd('highlight link GalaxyRightLspError GalaxyRightLspErrorActive')
@@ -174,7 +172,7 @@ gls.right = {
         return ' ' .. error_count .. ' '
       end,
       highlight = { colors.light4, colors.dark1 },
-    }
+    },
   },
   {
     RightLspWarning = {
@@ -183,8 +181,8 @@ gls.right = {
           return
         end
 
-        local warning_count = #vim.diagnostic.get(0, {severity=vim.diagnostic.severity.Warning})
-        if (warning_count == 0) then
+        local warning_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.Warning })
+        if warning_count == 0 then
           vim.cmd('highlight link GalaxyRightLspWarning GalaxyLeftLspInactive')
         else
           vim.cmd('highlight link GalaxyRightLspWarning GalaxyRightLspWarningActive')
@@ -193,7 +191,7 @@ gls.right = {
         return ' ' .. warning_count .. ' '
       end,
       highlight = { colors.light4, colors.dark1 },
-    }
+    },
   },
   {
     RightLspHint = {
@@ -202,7 +200,7 @@ gls.right = {
           return
         end
 
-        local hint_count = #vim.diagnostic.get(0, {severity=vim.diagnostic.severity.Hint})
+        local hint_count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.Hint })
         if hint_count == 0 then
           vim.cmd('highlight link GalaxyRightLspHint GalaxyLeftLspInactive')
         else
@@ -212,14 +210,16 @@ gls.right = {
         return ' ' .. hint_count .. ' '
       end,
       highlight = { colors.light4, colors.dark1 },
-    }
+    },
   },
   {
     LspPulse = {
       highlight = { colors.light4, colors.dark1 },
       provider = function()
         if #vim.tbl_keys(vim.lsp.buf_get_clients()) >= 1 then
-          local lsp_client_name_first = vim.lsp.get_client_by_id(tonumber(vim.inspect(vim.tbl_keys(vim.lsp.buf_get_clients())):match('%d+'))).name:match('%l+')
+          local lsp_client_name_first = vim.lsp.get_client_by_id(
+            tonumber(vim.inspect(vim.tbl_keys(vim.lsp.buf_get_clients())):match('%d+'))
+          ).name:match('%l+')
 
           if lsp_client_name_first == nil then
             return ' ' .. #vim.tbl_keys(vim.lsp.buf_get_clients()) .. ':   '
@@ -231,22 +231,23 @@ gls.right = {
         end
       end,
       separator = ' ',
-      separator_highlight  = { colors.light4, colors.dark1 },
-    }
+      separator_highlight = { colors.light4, colors.dark1 },
+    },
   },
   {
     FileInfo = {
       provider = FileEncode,
       highlight = { colors.light4, colors.dark2 },
       separator = ' ',
-      separator_highlight  = { colors.dark2, colors.dark1 },
+      separator_highlight = { colors.dark2, colors.dark1 },
     },
   },
   {
     EndSpace = {
-      provider =function() return '  ' end,
-      highlight   = { colors.light4, colors.dark2 },
+      provider = function()
+        return '  '
+      end,
+      highlight = { colors.light4, colors.dark2 },
     },
-  }
+  },
 }
-

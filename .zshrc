@@ -1,5 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-. "$HOME/.fig/shell/zshrc.pre.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -216,6 +216,10 @@ export PATH="$PATH:/usr/local/Cellar/node/16.12.0/bin"
 export PATH="$PATH:/usr/local/Cellar/node/17.5.0/bin"
 export PATH="$PATH:/usr/local/Cellar/node/17.6.0/bin"
 export PATH="$PATH:/usr/local/Cellar/node/17.9.0/bin"
+export PATH="$PATH:/usr/local/Cellar/node/18.4.0/bin"
+export PATH="$PATH:/usr/local/Cellar/node/18.4.0/bin"
+export PATH="$PATH:/usr/local/Cellar/node/18.7.0/bin"
+export PATH="$PATH:/usr/local/Cellar/node/18.11.0/bin"
 
 export BAT_THEME="gruvbox-dark"
 
@@ -317,5 +321,7 @@ _python_argcomplete() {
 # For the dotnet development
 export ASPNETCORE_ENVIRONMENT='development'
 
+export PATH="/usr/local/sbin:$PATH"
+
 # Fig post block. Keep at the bottom of this file.
-. "$HOME/.fig/shell/zshrc.post.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"

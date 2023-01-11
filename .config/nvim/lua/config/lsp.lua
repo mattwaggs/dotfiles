@@ -26,6 +26,7 @@ local on_attach = function(client, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
+
   local function buf_set_option(...)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
@@ -54,48 +55,47 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>e', '<Cmd>Telescope diagnostics bufnr=0<CR>', opts)
   buf_set_keymap('n', 'gr', [[<Cmd>lua require('telescope.builtin').lsp_references()<CR>]], opts)
   buf_set_keymap('n', 'gi', [[<Cmd>lua require('telescope.builtin').lsp_implementations()<CR>]], opts)
-  buf_set_keymap('n', 'gi', [[<Cmd>lua require('telescope.builtin').lsp_implementations()<CR>]], opts)
   buf_set_keymap('n', '<space>a', [[<Cmd>lua require('telescope.builtin').lsp_code_actions()<CR>]], opts)
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
-    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  elseif client.resolved_capabilities.document_range_formatting then
+  if client.server_capabilities.documentFormattingProvider then
+    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
+  elseif client.server_capabilities.documentRangeFormattingProvider then
     buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
   end
 
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightingProvider then
     vim.api.nvim_exec(
       [[
-    augroup lsp_document_highlight
-    autocmd! * <buffer>
-    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    augroup END
-    ]],
+        augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        augroup END
+      ]],
       false
     )
   end
 
-  if client.name == 'tsserver' then
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+  if client.name == 'html' then
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
 
-  if client.name == 'sumneko_lua' then
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+  if client.name == 'tsserver' then
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
 
   if client.name == 'jsonls' then
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
 
   if client.name == 'terraformls' then
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
 end
 
@@ -133,50 +133,13 @@ local function make_config()
   }
 end
 
--- lsp-install
--- local function setup_servers()
---   require'lspinstall'.setup()
---
---   -- get all installed servers
---   local servers = require'lspinstall'.installed_servers()
---   -- ... and add manually installed servers
---   table.insert(servers, "clangd")
---   table.insert(servers, "sourcekit")
---
---   for _, server in pairs(servers) do
---     local config = make_config()
---
---     -- language specific config
---     if server == "lua" then
---       config.settings = lua_settings
---     end
---     if server == "sourcekit" then
---       config.filetypes = {"swift", "objective-c", "objective-cpp"}; -- we don't want c and cpp!
---     end
---     if server == "clangd" then
---       config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
---     end
---
---     require'lspconfig'[server].setup(config)
---   end
--- end
 local function setup_servers()
   local lsp_installer = require('nvim-lsp-installer')
-
-  -- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
-  -- or if the server is already installed).
   lsp_installer.on_server_ready(function(server)
     local opts = make_config()
     if server.name == 'sumneko_lua' then
       opts.settings = lua_settings
     end
-    -- (optional) Customize the options passed to the server
-    -- if server.name == "tsserver" then
-    --     opts.root_dir = function() ... end
-    -- end
-    -- This setup() function will take the provided server configuration and decorate it with the necessary properties
-    -- before passing it onwards to lspconfig.
-    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
     server:setup(opts)
   end)
 end

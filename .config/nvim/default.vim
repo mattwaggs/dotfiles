@@ -39,13 +39,15 @@ Plug 'glepnir/galaxyline.nvim', {'branch': 'main'}
 Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'yamatsum/nvim-nonicons', {'branch': 'main'}
-Plug 'lewis6991/gitsigns.nvim', {'branch': 'main'}
+"  Plug 'lewis6991/gitsigns.nvim', {'branch': 'main'}
 
 " add flutter lsp stuff 
 Plug 'akinsho/flutter-tools.nvim', { 'branch': 'main' }
 
 " makes it easier to use jk to escape
 Plug 'max397574/better-escape.nvim'
+
+Plug 'karb94/neoscroll.nvim'
 
 call plug#end()
 " }}}
@@ -76,7 +78,7 @@ colorscheme gruvbox
 "let g:gruvbox_material_better_performance = 1
 "colorscheme gruvbox-material
 
-let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_contrast_dark='dark'
 hi Visual term=reverse cterm=reverse guibg=#2b3e36
 
 " the below settings are gruvbox specific
@@ -278,3 +280,22 @@ require("better_escape").setup {
 }
 EOF
 
+" Smooth scrolling settings ----------------- {{{
+" 
+" lua <<EOF
+" require('neoscroll').setup({
+"     -- All these keys will be mapped to their corresponding default scrolling animation
+"     mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+"                 '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+"     hide_cursor = true,          -- Hide cursor while scrolling
+"     stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+"     respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+"     cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+"     easing_function = nil,       -- Default easing function
+"     pre_hook = nil,              -- Function to run before the scrolling animation starts
+"     post_hook = nil,             -- Function to run after the scrolling animation ends
+"     performance_mode = false,    -- Disable "Performance Mode" on all buffers.
+" })
+" EOF
+" 
+" }}}
