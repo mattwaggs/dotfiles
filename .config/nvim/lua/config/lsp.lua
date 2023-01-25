@@ -52,7 +52,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<leader>qf', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   -- buf_set_keymap('n', '<space>e', [[<Cmd>lua require('telescope.builtin').lsp_document_diagnostics()<CR>]], opts)
-  buf_set_keymap('n', '<space>e', '<Cmd>Telescope diagnostics bufnr=0<CR>', opts)
+  buf_set_keymap('n', '<leader>e', '<Cmd>Telescope diagnostics bufnr=0<CR>', opts)
   buf_set_keymap('n', 'gr', [[<Cmd>lua require('telescope.builtin').lsp_references()<CR>]], opts)
   buf_set_keymap('n', 'gi', [[<Cmd>lua require('telescope.builtin').lsp_implementations()<CR>]], opts)
   buf_set_keymap('n', '<space>a', [[<Cmd>lua require('telescope.builtin').lsp_code_actions()<CR>]], opts)
@@ -133,18 +133,23 @@ local function make_config()
   }
 end
 
-local function setup_servers()
-  local lsp_installer = require('nvim-lsp-installer')
-  lsp_installer.on_server_ready(function(server)
-    local opts = make_config()
-    if server.name == 'sumneko_lua' then
-      opts.settings = lua_settings
-    end
-    server:setup(opts)
-  end)
-end
+require('mason').setup()
+require('mason-lspconfig').setup()
 
-setup_servers()
+require('mason-lspconfig').setup_handlers({
+  -- The first entry (without a key) will be the default handler
+  -- and will be called for each installed server that doesn't have
+  -- a dedicated handler.
+  function(server_name) -- default handler (optional)
+    local opts = make_config()
+    if server_name == 'omnisharp' then
+      opts['handlers'] = {
+        ['textDocument/definition'] = require('omnisharp_extended').handler,
+      }
+    end
+    require('lspconfig')[server_name].setup(opts)
+  end,
+})
 
 require('flutter-tools').setup(make_config()) -- use defaults
 

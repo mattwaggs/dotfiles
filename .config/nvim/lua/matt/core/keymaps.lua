@@ -15,7 +15,9 @@ end
 nmap('<leader>/', ':nohl<CR>')
 
 -- toggle file explorer
-nmap('<c-\\>', ':Neotree toggle position=float<CR>')
+-- nmap('<c-\\>', ':Neotree toggle position=float<CR>')
+nmap('<c-\\>', ':NvimTreeToggle<CR>')
+nmap('<space>e', ':NvimTreeFindFileToggle<CR>')
 
 -- delete single character without copying into register
 nmap('x', '"_x')

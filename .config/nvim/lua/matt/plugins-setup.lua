@@ -21,16 +21,18 @@ return require('packer').startup(function(use)
   use('kyazdani42/nvim-web-devicons')
   use('yamatsum/nvim-nonicons')
 
-  vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-  use({
-    'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v2.x',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'kyazdani42/nvim-web-devicons',
-      'MunifTanjim/nui.nvim',
-    },
-  })
+  --vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+  --use({
+  --  'nvim-neo-tree/neo-tree.nvim',
+  --  branch = 'v2.x',
+  --  requires = {
+  --    'nvim-lua/plenary.nvim',
+  --    'kyazdani42/nvim-web-devicons',
+  --    'MunifTanjim/nui.nvim',
+  --  },
+  --})
+
+  use('nvim-tree/nvim-tree.lua')
 
   -- improve matchit functions and adds tree-sitter support?!
   use('andymass/vim-matchup')
@@ -49,10 +51,14 @@ return require('packer').startup(function(use)
   use('editorconfig/editorconfig-vim')
 
   -- lsp
+  use('williamboman/mason.nvim')
+  use('williamboman/mason-lspconfig.nvim')
   use('neovim/nvim-lspconfig')
-  use('williamboman/nvim-lsp-installer') -- todo: change
+
   use('hrsh7th/nvim-compe') -- todo: change
   use('jose-elias-alvarez/null-ls.nvim')
+
+  use('Hoffs/omnisharp-extended-lsp.nvim')
 
   -- telescope
   use('nvim-lua/popup.nvim')

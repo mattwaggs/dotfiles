@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/editorconfig-vim",
     url = "https://github.com/editorconfig/editorconfig-vim"
   },
+  ["fidget.nvim"] = {
+    loaded = true,
+    path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/fidget.nvim",
+    url = "https://github.com/j-hui/fidget.nvim"
+  },
   ["flutter-tools.nvim"] = {
     loaded = true,
     path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
@@ -114,15 +119,15 @@ _G.packer_plugins = {
     path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/jsonc.vim",
     url = "https://github.com/neoclide/jsonc.vim"
   },
-  ["neo-tree.nvim"] = {
+  ["mason-lspconfig.nvim"] = {
     loaded = true,
-    path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
-    url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
+    path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
-  ["nui.nvim"] = {
+  ["mason.nvim"] = {
     loaded = true,
-    path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/nui.nvim",
-    url = "https://github.com/MunifTanjim/nui.nvim"
+    path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -134,11 +139,6 @@ _G.packer_plugins = {
     path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/nvim-compe",
     url = "https://github.com/hrsh7th/nvim-compe"
   },
-  ["nvim-lsp-installer"] = {
-    loaded = true,
-    path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
-    url = "https://github.com/williamboman/nvim-lsp-installer"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -149,6 +149,11 @@ _G.packer_plugins = {
     path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/nvim-nonicons",
     url = "https://github.com/yamatsum/nvim-nonicons"
   },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
@@ -158,6 +163,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
+  },
+  ["omnisharp-extended-lsp.nvim"] = {
+    loaded = true,
+    path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/omnisharp-extended-lsp.nvim",
+    url = "https://github.com/Hoffs/omnisharp-extended-lsp.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -193,6 +203,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["vim-matchup"] = {
+    loaded = true,
+    path = "/Users/Matt/.local/share/nvim/site/pack/packer/start/vim-matchup",
+    url = "https://github.com/andymass/vim-matchup"
   }
 }
 
